@@ -1,3 +1,45 @@
+/* Topbar para el switch de modo oscuro */
+.itm-header-topbar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.7rem 2.2rem 0.2rem 0;
+  background: transparent;
+}
+
+.mode-switch-top {
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 2px 8px #0001;
+  padding: 0.3rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: box-shadow 0.2s;
+}
+.mode-switch-top:hover {
+  box-shadow: 0 4px 16px #ffd60055;
+}
+/* Banner institucional con fondo blanco */
+.itm-banner-container {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0 0.5rem 0;
+  box-shadow: 0 2px 8px #0001;
+  z-index: 11;
+}
+
+.itm-banner-img {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.5rem auto;
+}
 /* Menú de redes sociales debajo del header */
 .itm-social-navbar {
   width: 100%;

@@ -28,16 +28,8 @@ function App() {
   return (
     <div className={darkMode ? 'main-bg dark-mode' : 'main-bg'}>
       <header className="itm-header">
-        <div className="itm-header-row">
-          <div className="itm-logo">
-            <img
-              src="/LOGO_ITMexicali.jpg"
-              alt="Logo ITM"
-              style={{ height: '60px', marginRight: '14px', verticalAlign: 'middle' }}
-            />
-            Instituto Tecnológico de Mexicali
-          </div>
-          <div className="mode-switch">
+        <div className="itm-header-topbar">
+          <div className="mode-switch mode-switch-top">
             <span className="mode-icon" style={{fontSize: '1.3rem', marginRight: '0.3rem'}}><FaSun /></span>
             <label className="switch">
               <input type="checkbox" checked={darkMode} onChange={handleToggle} />
@@ -47,7 +39,10 @@ function App() {
           </div>
         </div>
       </header>
-
+      {/* Banner institucional */}
+      <div className="itm-banner-container">
+        <img src="/banneritm.png" alt="Banner ITM" className="itm-banner-img" />
+      </div>
       <nav className="itm-social-navbar">
         <a href="http://www.itmexicali.edu.mx/" target="_blank" rel="noopener noreferrer" aria-label="Página oficial ITMEXICALI" className="itm-social-logo-link">
           <img src="/LOGO_ITMexicali.jpg" alt="Página oficial ITMEXICALI" style={{height: '38px', verticalAlign: 'middle'}} />
