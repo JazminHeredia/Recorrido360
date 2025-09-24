@@ -2,33 +2,63 @@
 
 import './App.css';
 import React, { useState } from 'react';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import { FaSun, FaMoon, FaFacebook, FaYoutube } from 'react-icons/fa';
+
+
+function getSystemDarkMode() {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return true;
+  }
+  return false;
+}
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(getSystemDarkMode());
+
+  // Actualiza el modo si el usuario cambia la preferencia del sistema
+  React.useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e) => setDarkMode(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   const handleToggle = () => setDarkMode((prev) => !prev);
 
   return (
     <div className={darkMode ? 'main-bg dark-mode' : 'main-bg'}>
       <header className="itm-header">
-        <div className="itm-logo">
-          <img
-            src="/LOGO_ITMexicali.jpg"
-            alt="Logo ITM"
-            style={{ height: '60px', marginRight: '14px', verticalAlign: 'middle' }}
-          />
-          Instituto Tecnológico de Mexicali
-        </div>
-        <div className="mode-switch">
-          <span className="mode-icon" style={{fontSize: '1.3rem', marginRight: '0.3rem'}}><FaSun /></span>
-          <label className="switch">
-            <input type="checkbox" checked={darkMode} onChange={handleToggle} />
-            <span className="slider"></span>
-          </label>
-          <span className="mode-icon" style={{fontSize: '1.2rem', marginLeft: '0.3rem'}}><FaMoon /></span>
+        <div className="itm-header-row">
+          <div className="itm-logo">
+            <img
+              src="/LOGO_ITMexicali.jpg"
+              alt="Logo ITM"
+              style={{ height: '60px', marginRight: '14px', verticalAlign: 'middle' }}
+            />
+            Instituto Tecnológico de Mexicali
+          </div>
+          <div className="mode-switch">
+            <span className="mode-icon" style={{fontSize: '1.3rem', marginRight: '0.3rem'}}><FaSun /></span>
+            <label className="switch">
+              <input type="checkbox" checked={darkMode} onChange={handleToggle} />
+              <span className="slider"></span>
+            </label>
+            <span className="mode-icon" style={{fontSize: '1.2rem', marginLeft: '0.3rem'}}><FaMoon /></span>
+          </div>
         </div>
       </header>
+
+      <nav className="itm-social-navbar">
+        <a href="http://www.itmexicali.edu.mx/" target="_blank" rel="noopener noreferrer" aria-label="Página oficial ITMEXICALI" className="itm-social-logo-link">
+          <img src="/LOGO_ITMexicali.jpg" alt="Página oficial ITMEXICALI" style={{height: '38px', verticalAlign: 'middle'}} />
+        </a>
+        <a href="https://www.facebook.com/ITMEXICALI" target="_blank" rel="noopener noreferrer" aria-label="Facebook ITMEXICALI">
+          <FaFacebook size={28} />
+        </a>
+        <a href="https://www.youtube.com/@tecnmcampusmexicali7369" target="_blank" rel="noopener noreferrer" aria-label="YouTube ITMEXICALI">
+          <FaYoutube size={28} />
+        </a>
+      </nav>
       <main className="itm-main">
         <section className="itm-description">
           <h2>Bienvenido al Recorrido Virtual</h2>
@@ -39,8 +69,8 @@ function App() {
         <section className="unity-section">
           {/* Aquí irá el visor de Unity WebGL */}
           <div className="unity-placeholder">
-            <span>Recorrido 360° - Atracción Principal</span>
-            <p style={{fontSize: '0.9rem', color: '#555'}}>Aquí aparecerá tu proyecto Unity WebGL</p>
+            <span>Recorrido 360° </span>
+          
           </div>
         </section>
         <section className="itm-map-section">
@@ -68,19 +98,7 @@ function App() {
           </div>
         </section>
 
-        <section className="itm-social-section">
-          <div className="itm-social-links">
-            <a href="http://www.itmexicali.edu.mx/" target="_blank" rel="noopener noreferrer" aria-label="Página oficial ITMEXICALI">
-              <span role="img" aria-label="Sitio web" style={{fontSize: '1.5rem', marginRight: '0.5rem'}}>🌐</span>Página oficial del ITM
-            </a>
-            <a href="https://www.facebook.com/ITMEXICALI" target="_blank" rel="noopener noreferrer" aria-label="Facebook ITMEXICALI">
-              <span role="img" aria-label="Facebook" style={{fontSize: '1.5rem', marginRight: '0.5rem'}}>📘</span>Facebook
-            </a>
-            <a href="https://www.youtube.com/@tecnmcampusmexicali7369" target="_blank" rel="noopener noreferrer" aria-label="YouTube ITMEXICALI">
-              <span role="img" aria-label="YouTube" style={{fontSize: '1.5rem', marginRight: '0.5rem'}}>▶️</span>YouTube
-            </a>
-          </div>
-        </section>
+
       </main>
       <footer className="itm-footer">
         &copy; {new Date().getFullYear()} Instituto Tecnológico de Mexicali

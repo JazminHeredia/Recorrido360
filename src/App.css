@@ -1,3 +1,112 @@
+/* Menú de redes sociales debajo del header */
+.itm-social-navbar {
+  width: 100%;
+  background: #003366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.5rem 0 0.5rem 0;
+  box-shadow: 0 2px 8px #00336622;
+  z-index: 10;
+}
+.itm-social-navbar a {
+  color: #ffd600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+.itm-social-navbar a:hover {
+  background: #ffd600;
+  color: #003366;
+  box-shadow: 0 2px 8px #ffd60055;
+}
+.itm-social-logo-link {
+  background: transparent !important;
+  width: 48px !important;
+  height: 40px !important;
+  margin-right: 0.7rem;
+  padding: 0;
+}
+.itm-social-logo-link img {
+  height: 38px;
+  width: auto;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px #0002;
+}
+@media (max-width: 700px) {
+  .itm-social-navbar {
+    gap: 0.7rem;
+    padding: 0.3rem 0;
+  }
+  .itm-social-navbar a {
+    width: 34px;
+    height: 34px;
+    font-size: 1.2rem;
+  }
+  .itm-social-logo-link img {
+    height: 28px;
+  }
+}
+/* Navbar de redes sociales en el header */
+.itm-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.itm-navbar {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.itm-navbar a {
+  color: #ffd600;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.itm-navbar a:hover {
+  background: #ffd60033;
+  color: #fff;
+}
+.nav-label {
+  display: inline-block;
+}
+
+@media (max-width: 900px) {
+  .itm-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0 1rem;
+  }
+  .itm-navbar {
+    gap: 0.7rem;
+    font-size: 1rem;
+  }
+  .mode-switch {
+    position: static;
+    margin-top: 0.5rem;
+  }
+}
 /* Switch modo claro/oscuro */
 .mode-switch {
   position: absolute;
