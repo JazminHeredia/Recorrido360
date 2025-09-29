@@ -5,7 +5,7 @@
   z-index: 20;
   background: #fff;
   border-radius: 24px;
-  box-shadow: 0 2px 8px #00336611;
+  
   padding: 0.2rem 0.7rem;
   display: flex;
   align-items: center;
@@ -44,7 +44,7 @@
   justify-content: center;
   align-items: center;
   padding: 0.5rem 0 0.5rem 0;
-  box-shadow: 0 2px 8px #0001;
+  
   z-index: 11;
 }
 
@@ -64,7 +64,7 @@
   justify-content: center;
   gap: 1.5rem;
   padding: 0.5rem 0 0.5rem 0;
-  box-shadow: 0 2px 8px #00336622;
+
   z-index: 10;
 }
 .itm-social-navbar a {
@@ -82,7 +82,7 @@
 .itm-social-navbar a:hover {
   background: #207952;
   color: #003366;
-  box-shadow: 0 2px 8px #ffd60055;
+ 
 }
 .itm-social-logo-link {
   background: transparent !important;
@@ -95,7 +95,7 @@
   height: 38px;
   width: auto;
   border-radius: 6px;
-  box-shadow: 0 1px 4px #0002;
+  
 }
 @media (max-width: 700px) {
   .itm-social-navbar {
@@ -227,40 +227,52 @@
 
 /* Modo oscuro */
 .dark-mode {
-  background: #181c24;
+  background: #16213e;
 }
 .dark-mode .itm-header {
-  background: #222b3a;
+  background: #1a237e;
   color: #ffd600;
+  box-shadow: 0 2px 8px #0006;
 }
 .dark-mode .itm-logo {
   color: #ffd600;
   text-shadow: 1px 2px 8px #000a;
+  letter-spacing: 2px;
 }
+
 .dark-mode .itm-main,
 .dark-mode .itm-description,
 .dark-mode .unity-section,
 .dark-mode .itm-map-section {
-  background: #232a36 !important;
-  color: #ffd600 !important;
-  box-shadow: 0 2px 12px #0004;
+  background: transparent;
+  color: #f3f6fc;
+  box-shadow: none;
 }
 .dark-mode .itm-description h2 {
   color: #ffd600;
+  text-shadow: 0 2px 8px #0006;
 }
 .dark-mode .itm-footer {
-  background: #222b3a;
+  background: #1a237e;
   color: #ffd600;
+  border-top: 1px solid #ffd60044;
 }
 .dark-mode .itm-contact-info {
-  background: #232a36;
-  color: #ffd600;
+  background: transparent;
+  color: #f3f6fc;
+  border-left: 4px solid #ffd600;
+  padding-left: 1.5rem;
 }
 .dark-mode .itm-social-links a {
   color: #ffd600;
+  background: #1a237e;
+  border-radius: 6px;
+  padding: 0.3em 0.8em;
+  transition: background 0.2s, color 0.2s;
 }
 .dark-mode .itm-social-links a:hover {
-  color: #fff;
+  color: #16213e;
+  background: #ffd600;
 }
 .itm-social-section {
   width: 100%;
@@ -300,9 +312,9 @@
 .itm-contact-info {
   min-width: 220px;
   max-width: 320px;
-  background: #f4f6fa;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px #00336611;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
   padding: 1.2rem 1.5rem;
   color: #003366;
   font-size: 1rem;
@@ -341,9 +353,9 @@
   width: 100%;
   max-width: 900px;
   margin: 2rem auto 0 auto;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px #00336611;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
   padding: 1.5rem 2rem 2rem 2rem;
   text-align: center;
 }
@@ -417,9 +429,9 @@ body {
   width: 100%;
   max-width: 900px;
   min-height: 420px;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #00336622;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -443,9 +455,9 @@ body {
 
 .itm-description {
   max-width: 700px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px #00336611;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
   padding: 1.5rem 2rem;
   text-align: center;
   color: #003366;
