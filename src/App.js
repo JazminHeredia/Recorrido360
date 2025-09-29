@@ -27,22 +27,21 @@ function App() {
 
   return (
     <div className={darkMode ? 'main-bg dark-mode' : 'main-bg'}>
-      <header className="itm-header">
-        <div className="itm-header-topbar">
-          <div className="mode-switch mode-switch-top">
-            <span className="mode-icon" style={{fontSize: '1.3rem', marginRight: '0.3rem'}}><FaSun /></span>
-            <label className="switch">
-              <input type="checkbox" checked={darkMode} onChange={handleToggle} />
-              <span className="slider"></span>
-            </label>
-            <span className="mode-icon" style={{fontSize: '1.2rem', marginLeft: '0.3rem'}}><FaMoon /></span>
-          </div>
-        </div>
-      </header>
-      {/* Banner institucional */}
+  {/* Eliminar header para que el banner quede hasta arriba */}
+      {/* Banner institucional con switch */}
       <div className="itm-banner-container">
+        <div className="mode-switch mode-switch-banner">
+          <span className="mode-icon" style={{fontSize: '1.3rem', marginRight: '0.3rem'}}><FaSun /></span>
+          <label className="switch">
+            <input type="checkbox" checked={darkMode} onChange={handleToggle} />
+            <span className="slider"></span>
+          </label>
+          <span className="mode-icon" style={{fontSize: '1.2rem', marginLeft: '0.3rem'}}><FaMoon /></span>
+        </div>
         <img src="/banneritm.png" alt="Banner ITM" className="itm-banner-img" />
       </div>
+      {/* Banner institucional */}
+    
       <nav className="itm-social-navbar">
         <a href="http://www.itmexicali.edu.mx/" target="_blank" rel="noopener noreferrer" aria-label="Página oficial ITMEXICALI" className="itm-social-logo-link">
           <img src="/LOGO_ITMexicali.jpg" alt="Página oficial ITMEXICALI" style={{height: '38px', verticalAlign: 'middle'}} />
