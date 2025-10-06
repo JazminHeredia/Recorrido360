@@ -20,8 +20,10 @@ function App() {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const handler = (e) => setDarkMode(e.matches);
     mq.addEventListener('change', handler);
+    // Cambia la clase del body según el modo oscuro
+    document.body.classList.toggle('dark-mode', darkMode);
     return () => mq.removeEventListener('change', handler);
-  }, []);
+  }, [darkMode]);
 
   const handleToggle = () => setDarkMode((prev) => !prev);
 
