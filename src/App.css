@@ -563,7 +563,8 @@
   .map-contact-grid {
     flex-direction: column;
     gap: 1.5rem;
-    align-items: stretch;
+    /* Center items on narrow screens so the map and contact block align centrally */
+    align-items: center;
   }
   .itm-contact-info {
     max-width: 100%;
@@ -606,6 +607,23 @@
   height: 100%;
   border: 0;
   border-radius: 10px;
+}
+
+/* Mobile-specific: ensure the map centers and fits nicely in portrait */
+@media (max-width: 700px) {
+  .itm-map-section {
+    /* dejar un poco menos de padding lateral para que el mapa quede más a la izquierda */
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .map-responsive {
+    max-width: 680px; /* cap extremely wide layouts */
+    width: 100%;
+    /* quitar el margin auto para que el mapa se alinee al borde izquierdo del contenedor */
+    margin: 0;
+    /* pequeño ajuste hacia la izquierda para alinear con el contenedor Recorrido 360 */
+    transform: translateX(-0.5rem);
+    padding-bottom: 56.25%;
+  }
 }
 
 body {
