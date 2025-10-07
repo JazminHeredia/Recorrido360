@@ -1,4 +1,5 @@
 /* ...existing code... */
+/* Botón modo oscuro: posición absoluta en desktop, fija en móvil */
 .mode-switch-banner {
   position: absolute;
   top: 18px;
@@ -9,6 +10,32 @@
   padding: 0.2rem 0.7rem;
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 700px) and (orientation: portrait) {
+  .itm-social-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding-right: 0.5rem;
+  }
+  .mode-switch-banner {
+    position: static;
+    margin: 0;
+    background: #fff;
+    box-shadow: 0 2px 12px #0002;
+    border-radius: 24px;
+    padding: 0.3rem 1rem;
+    z-index: 10;
+    width: fit-content;
+    order: 2;
+    /* En portrait móvil preferimos ocultarlo para evitar solapamiento */
+    display: none !important;
+  }
+  .itm-social-navbar > *:not(.mode-switch-banner) {
+    order: 1;
+  }
 }
 
 .mode-switch-banner .mode-icon {
@@ -105,6 +132,16 @@
   font-size: 1.5rem;
   text-decoration: none;
 }
+/* placeholder to help locate change */
+/* Force social icons (except the logo image link) to be white in all modes */
+.itm-social-navbar a:not(.itm-social-logo-link) {
+  color: #fff !important;
+}
+.itm-social-navbar a:not(.itm-social-logo-link) svg,
+.itm-social-navbar a:not(.itm-social-logo-link) .react-icon {
+  color: #fff !important;
+  fill: #fff !important;
+}
 .itm-social-navbar a:hover {
   background: #207952;
   color: #003366;
@@ -127,6 +164,10 @@
   .itm-social-navbar {
     gap: 0.7rem;
     padding: 0.3rem 0;
+    /* Necesario para posicionar de forma absoluta el switch móvil sin afectar el flujo */
+    position: relative;
+    /* Permitir que el switch posicionado absolutamente no quede recortado */
+    overflow: visible;
   }
   .itm-social-navbar a {
     width: 34px;
@@ -136,6 +177,147 @@
   .itm-social-logo-link img {
     height: 28px;
   }
+  /* Ocultar el switch del banner en móvil para evitar solapamiento */
+  .mode-switch-banner {
+    display: none;
+  }
+  /* Mostrar switch dentro del navbar (barra azul) en móvil
+     Lo posicionamos de forma absoluta para que no desplace a los demás elementos
+  */
+  .mode-switch-navbar-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    position: absolute;
+  /* centrar verticalmente en el borde derecho del navbar -> posición intermedia en móvil */
+  top: 32%;
+    right: 12px;
+    transform: translateY(-50%);
+    background: transparent;
+    border-radius: 16px;
+    /* remove extra padding so the element centers with the social icons */
+    padding: 0;
+    height: 34px;
+    box-sizing: border-box;
+    box-shadow: none;
+    z-index: 15;
+    transition: top 0.12s ease, right 0.12s ease, transform 0.12s ease;
+  }
+}
+
+/* Mobile-only toggle button (moon/sun) replacing the checkbox switch */
+.mode-toggle-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 0;
+  padding: 4px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: inherit;
+}
+.mode-toggle-button:hover {
+  background: rgba(255,255,255,0.06);
+}
+.mode-toggle-button:focus {
+  outline: 2px solid #ffd60055;
+  outline-offset: 2px;
+}
+
+/* Ensure the mobile toggle button icon color adapts to light/dark modes */
+.mode-switch-navbar-mobile .mode-toggle-button .mode-icon {
+  color: #000;
+}
+.dark-mode .mode-switch-navbar-mobile .mode-toggle-button .mode-icon {
+  color: #fff;
+}
+
+/* Match the size and vertical alignment of the social icons on small screens */
+@media (max-width: 700px) {
+  .mode-toggle-button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+  }
+  .mode-toggle-button .mode-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+  /* ensure the container is vertically centered relative to navbar icons */
+  .mode-switch-navbar-mobile {
+    top: 32%;
+    transform: translateY(-50%);
+    right: 10px;
+  }
+}
+
+/* Slightly smaller on very narrow screens to avoid crowding */
+@media (max-width: 420px) {
+  .mode-toggle-button {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* En pantallas mayores, la versión móvil del switch debe estar oculta */
+.mode-switch-navbar-mobile {
+  display: none;
+}
+
+/* Colores específicos para los iconos dentro del switch en navbar */
+.mode-switch-navbar-mobile .mode-icon {
+  color: #000; /* claro por defecto */
+}
+.dark-mode .mode-switch-navbar-mobile .mode-icon {
+  color: #fff; /* blanco en modo oscuro */
+}
+/* Ensure banner switch is hidden on small screens and navbar mobile switch is visible only on small screens.
+   Also force icon colors to match light/dark modes (black in light, white in dark). */
+@media (max-width: 900px) {
+  /* Hide the banner switch on most small screens to avoid duplication/overlap */
+  .mode-switch-banner {
+    display: none !important;
+  }
+  /* Make sure the mobile navbar switch is shown on small screens */
+  .mode-switch-navbar-mobile {
+    display: flex !important;
+    align-items: center;
+    /* ensure positioned absolutely in the navbar on slightly larger small screens (landscape phones/tablets) */
+    position: absolute !important;
+  top: 32% !important;
+    right: 12px !important;
+    transform: translateY(-50%) !important;
+  }
+  .itm-social-navbar {
+    /* ensure navbar is relative and doesn't clip the absolute switch */
+    position: relative !important;
+    overflow: visible !important;
+  }
+}
+
+/* Default icon color (light mode) */
+.mode-icon {
+  color: #000 !important;
+  transition: color 0.15s ease-in-out;
+}
+
+/* Icons (including social icons in navbar) become white in dark mode */
+.dark-mode .mode-icon {
+  color: #fff !important;
+}
+.itm-social-navbar a {
+  color: #000 !important;
+}
+.dark-mode .itm-social-navbar a {
+  color: #fff !important;
 }
 /* Navbar de redes sociales en el header */
 .itm-header-row {
@@ -164,13 +346,14 @@
   font-size: 1.1rem;
   padding: 0.2rem 0.7rem;
   border-radius: 6px;
+}
 .main-bg {
   min-height: 100vh;
   width: 100vw;
   background: #fff;
   transition: background 0.3s;
 }
-}
+ 
 
 .dark-mode .main-bg {
   background: #222 !important;
@@ -429,6 +612,8 @@ body {
   margin: 0;
   font-family: 'Segoe UI', 'Arial', sans-serif;
   background: #fff;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 body.dark-mode {

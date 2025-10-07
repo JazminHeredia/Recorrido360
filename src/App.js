@@ -54,7 +54,24 @@ function App() {
         <a href="https://www.youtube.com/@tecnmcampusmexicali7369" target="_blank" rel="noopener noreferrer" aria-label="YouTube ITMEXICALI">
           <FaYoutube size={28} />
         </a>
+        {/* Mobile-only mode switch: visible only on small screens via CSS */}
+        <div className="mode-switch mode-switch-navbar-mobile" aria-hidden={false}>
+          {/* Mobile: simple toggle button that shows moon or sun */}
+          <button
+            className="mode-toggle-button"
+            onClick={handleToggle}
+            aria-label={darkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+            title={darkMode ? 'Modo claro' : 'Modo oscuro'}
+          >
+            <span className="mode-icon" style={{ fontSize: '1.2rem' }}>
+              {darkMode ? <FaSun /> : <FaMoon />}
+            </span>
+          </button>
+        </div>
       </nav>
+  {/* Switch para móvil: se muestra únicamente en pantallas pequeñas dentro de la barra azul */}
+  {/* Se renderiza aquí para evitar solapamientos en móvil; está oculto en escritorio vía CSS */}
+      
       <main className="itm-main">
         <section className="itm-description">
           <h2>Bienvenido al Recorrido Virtual</h2>
