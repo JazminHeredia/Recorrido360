@@ -486,6 +486,19 @@
   border-left: 4px solid #ffd600;
   padding-left: 1.5rem;
 }
+.dark-mode .itm-map-section h3 {
+  /* título 'Ubicación' más claro en modo oscuro */
+  color: #ffffff !important;
+}
+.dark-mode .itm-contact-info h4 {
+  /* título 'Dirección' / 'Contacto' más claro */
+  color: #ffffff !important;
+}
+.dark-mode .itm-contact-info p,
+.dark-mode .itm-contact-info a {
+  /* datos de contacto (email, teléfono) un poco más claros que el texto base */
+  color: #e8f2ff !important;
+}
 .dark-mode .itm-social-links a {
   color: #ffd600;
   background: #1a237e;
