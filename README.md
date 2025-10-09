@@ -68,3 +68,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Theming (light / dark separated files)
+
+This project now includes separate stylesheet files for light and dark themes located in `public/styles/`:
+
+- `public/styles/light.css` — optional light-mode overrides (mostly empty by default).
+- `public/styles/dark.css` — contains dark-mode specific rules. The app dynamically loads this file when dark mode is active.
+
+How it works:
+
+- The app still toggles the `dark-mode` class on `<body>` for backwards compatibility.
+- Additionally, when the user enables dark mode the app inserts a `<link id="theme-css" href="/styles/dark.css">` into the document head. When dark mode is disabled the link is removed.
+- Because the files live in `public/`, they are served statically and can be toggled at runtime without rebuilding.
+
+If you want to add or change dark-mode styles, edit `public/styles/dark.css`. For light-mode overrides you can use `public/styles/light.css` or keep rules in `src/App.css`.

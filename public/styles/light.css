@@ -1,0 +1,9 @@
+/* Light-mode (base) styles in public for optional toggling. Keep minimal; main styles still in App.css */
+
+.mode-icon {
+  color: #000 !important;
+}
+
+.itm-social-navbar a:not(.itm-social-logo-link) {
+  color: #fff !important;
+}

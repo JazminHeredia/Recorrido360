@@ -15,13 +15,10 @@
 @media (max-width: 700px) and (orientation: portrait) {
   .itm-social-navbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     position: relative;
-    padding-right: 0.5rem;
   }
   .mode-switch-banner {
-    position: static;
     margin: 0;
     background: #fff;
     box-shadow: 0 2px 12px #0002;
@@ -33,35 +30,15 @@
     /* En portrait móvil preferimos ocultarlo para evitar solapamiento */
     display: none !important;
   }
-  .itm-social-navbar > *:not(.mode-switch-banner) {
-    order: 1;
-  }
 }
 
 .mode-switch-banner .mode-icon {
   color: #003366;
 }
 
-.dark-mode .mode-switch-banner {
-  background: #222;
-}
-.dark-mode .mode-switch-banner .mode-icon {
-  color: #fff;
-}
-.dark-mode .mode-switch-banner .mode-icon {
-  color: #fff;
-}
-
-.dark-mode .mode-switch-banner {
-  background: #222;
-  border-radius: 24px;
-  padding: 0.2rem 0.7rem;
-  display: flex;
-  align-items: center;
-}
-.itm-banner-container {
-  position: relative;
-}
+/* placeholder */
+/* dark-mode styles moved to public/styles/dark.css */
+/* End of banner section */
 /* Topbar para el switch de modo oscuro */
 .itm-header-topbar {
   width: 100%;
@@ -231,9 +208,7 @@
 .mode-switch-navbar-mobile .mode-toggle-button .mode-icon {
   color: #000;
 }
-.dark-mode .mode-switch-navbar-mobile .mode-toggle-button .mode-icon {
-  color: #fff;
-}
+/* dark-mode styles moved to public/styles/dark.css */
 
 /* Match the size and vertical alignment of the social icons on small screens */
 @media (max-width: 700px) {
@@ -276,9 +251,7 @@
 .mode-switch-navbar-mobile .mode-icon {
   color: #000; /* claro por defecto */
 }
-.dark-mode .mode-switch-navbar-mobile .mode-icon {
-  color: #fff; /* blanco en modo oscuro */
-}
+/* dark-mode styles moved to public/styles/dark.css */
 /* Ensure banner switch is hidden on small screens and navbar mobile switch is visible only on small screens.
    Also force icon colors to match light/dark modes (black in light, white in dark). */
 @media (max-width: 900px) {
@@ -310,15 +283,7 @@
 }
 
 /* Icons (including social icons in navbar) become white in dark mode */
-.dark-mode .mode-icon {
-  color: #fff !important;
-}
-.itm-social-navbar a {
-  color: #000 !important;
-}
-.dark-mode .itm-social-navbar a {
-  color: #fff !important;
-}
+/* dark-mode moved to public/styles/dark.css */
 /* Navbar de redes sociales en el header */
 .itm-header-row {
   display: flex;
@@ -444,72 +409,8 @@
   font-weight: 500;
 }
 
-/* Modo oscuro */
-.dark-mode {
-  background: #16213e;
-}
-.dark-mode .itm-header {
-  background: #1a237e;
-  color: #ffd600;
-  box-shadow: 0 2px 8px #0006;
-}
-.dark-mode .itm-logo {
-.dark-mode.main-bg {
-  background: #222;
-}
-
-  color: #ffd600;
-  text-shadow: 1px 2px 8px #000a;
-  letter-spacing: 2px;
-}
-
-.dark-mode .itm-main,
-.dark-mode .itm-description,
-.dark-mode .unity-section,
-.dark-mode .itm-map-section {
-  background: transparent;
-  color: #f3f6fc;
-  box-shadow: none;
-}
-.dark-mode .itm-description h2 {
-  color: #ffd600;
-  text-shadow: 0 2px 8px #0006;
-}
-.dark-mode .itm-footer {
-  background: #003366;
-  color: #ffd600;
-  border-top: 1px solid #ffd60044;
-}
-.dark-mode .itm-contact-info {
-  background: transparent;
-  color: #f3f6fc;
-  border-left: 4px solid #ffd600;
-  padding-left: 1.5rem;
-}
-.dark-mode .itm-map-section h3 {
-  /* título 'Ubicación' más claro en modo oscuro */
-  color: #ffffff !important;
-}
-.dark-mode .itm-contact-info h4 {
-  /* título 'Dirección' / 'Contacto' más claro */
-  color: #ffffff !important;
-}
-.dark-mode .itm-contact-info p,
-.dark-mode .itm-contact-info a {
-  /* datos de contacto (email, teléfono) un poco más claros que el texto base */
-  color: #e8f2ff !important;
-}
-.dark-mode .itm-social-links a {
-  color: #ffd600;
-  background: #1a237e;
-  border-radius: 6px;
-  padding: 0.3em 0.8em;
-  transition: background 0.2s, color 0.2s;
-}
-.dark-mode .itm-social-links a:hover {
-  color: #16213e;
-  background: #ffd600;
-}
+/* Dark-mode styles were moved to public/styles/dark.css. */
+/* The app dynamically adds/removes /styles/dark.css when dark mode is active. */
 .itm-social-section {
   width: 100%;
   display: flex;

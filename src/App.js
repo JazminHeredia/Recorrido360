@@ -22,6 +22,20 @@ function App() {
     mq.addEventListener('change', handler);
     // Cambia la clase del body según el modo oscuro
     document.body.classList.toggle('dark-mode', darkMode);
+
+    // Dynamically load or remove the dark.css stylesheet from /styles/
+    const existingLink = document.getElementById('theme-css');
+    if (darkMode) {
+      if (!existingLink) {
+        const link = document.createElement('link');
+        link.id = 'theme-css';
+        link.rel = 'stylesheet';
+        link.href = '/styles/dark.css';
+        document.head.appendChild(link);
+      }
+    } else {
+      if (existingLink) existingLink.remove();
+    }
     return () => mq.removeEventListener('change', handler);
   }, [darkMode]);
 
