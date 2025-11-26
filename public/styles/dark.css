@@ -103,3 +103,27 @@
 body.dark-mode {
   background: #222 !important;
 }
+
+/* Defensive fixes: ensure banner and nav text are visible in dark mode */
+.itm-banner-img {
+  display: block;
+  /* Preserve the size limits from light mode (max-width, max-height) */
+  /* Do not override them here */
+}
+
+/* Nav label and social icons contrast */
+.itm-social-navbar a,
+.itm-social-logo-link .nav-official-label,
+.itm-navbar a {
+  color: #ffd600 !important;
+}
+
+/* Ensure header/nav background is consistent */
+.itm-social-navbar {
+  background: #003366 !important;
+}
+
+/* If banner image is missing, show a fallback background color so header remains visible */
+.itm-banner-container {
+  background-color: #003366; /* fallback */
+}

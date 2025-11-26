@@ -79,11 +79,23 @@
 }
 
 .itm-banner-img {
+  /* Mantener la imagen del banner responsiva pero limitar su tamaño visual
+     para evitar que ocupe demasiado espacio en localhost */
   max-width: 420px;
-  width: 100%;
+  max-height: 140px;
+  width: auto;
   height: auto;
   display: block;
   margin: 0.5rem auto;
+  object-fit: contain;
+}
+
+@media (max-width: 700px) {
+  .itm-banner-img {
+    max-width: 280px;
+    max-height: 110px;
+    width: auto;
+  }
 }
 /* Menú de redes sociales debajo del header */
 .itm-social-navbar {
@@ -126,16 +138,25 @@
 }
 .itm-social-logo-link {
   background: transparent !important;
-  width: 48px !important;
-  height: 40px !important;
+  width: auto !important;
+  height: auto !important;
   margin-right: 0.7rem;
   padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
 }
 .itm-social-logo-link img {
   height: 38px;
   width: auto;
   border-radius: 6px;
-  
+}
+.itm-social-logo-link .nav-official-label {
+  color: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
 }
 @media (max-width: 700px) {
   .itm-social-navbar {
@@ -150,6 +171,13 @@
     width: 34px;
     height: 34px;
     font-size: 1.2rem;
+  }
+  /* ensure the logo link keeps its full width for the label */
+  .itm-social-logo-link {
+    width: auto !important;
+    height: auto !important;
+    display: inline-flex;
+    align-items: center;
   }
   .itm-social-logo-link img {
     height: 28px;
@@ -588,8 +616,8 @@ body.dark-mode {
 
 .unity-section {
   width: 100%;
-  max-width: 900px;
-  min-height: 420px;
+  max-width: 1000px;
+  min-height: 500px;
   background: transparent;
   border-radius: 0;
   box-shadow: none;
@@ -601,17 +629,22 @@ body.dark-mode {
 }
 
 .unity-placeholder {
+  position: relative;
   width: 100%;
-  height: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #003366;
-  font-size: 1.4rem;
-  background: repeating-linear-gradient(135deg, #e3e8f0 0 20px, #ffd60022 20px 40px);
+  padding-bottom: 75.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  background: transparent;
   border-radius: 12px;
-  border: 2px dashed #00336688;
+  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.15);
+}
+
+.unity-placeholder iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .itm-description {

@@ -23,14 +23,15 @@ function App() {
     // Cambia la clase del body según el modo oscuro
     document.body.classList.toggle('dark-mode', darkMode);
 
-    // Dynamically load or remove the dark.css stylesheet from /styles/
+    // Dynamically load or remove the dark.css stylesheet from public/styles
     const existingLink = document.getElementById('theme-css');
+    const darkHref = (process.env.PUBLIC_URL || '') + '/styles/dark.css';
     if (darkMode) {
       if (!existingLink) {
         const link = document.createElement('link');
         link.id = 'theme-css';
         link.rel = 'stylesheet';
-        link.href = '/styles/dark.css';
+        link.href = darkHref;
         document.head.appendChild(link);
       }
     } else {
@@ -54,13 +55,14 @@ function App() {
           </label>
           <span className="mode-icon" style={{fontSize: '1.2rem', marginLeft: '0.3rem'}}><FaMoon /></span>
         </div>
-        <img src="/banneritm.png" alt="Banner ITM" className="itm-banner-img" />
+        <img src={process.env.PUBLIC_URL + '/banneritm.png'} alt="Banner ITM" className="itm-banner-img" />
       </div>
       {/* Banner institucional */}
     
       <nav className="itm-social-navbar">
         <a href="http://www.itmexicali.edu.mx/" target="_blank" rel="noopener noreferrer" aria-label="Página oficial ITMEXICALI" className="itm-social-logo-link">
-          <img src="/LOGO_ITMexicali.jpg" alt="Página oficial ITMEXICALI" style={{height: '38px', verticalAlign: 'middle'}} />
+          <span className="nav-official-label">Página oficial</span>
+          <img src={process.env.PUBLIC_URL + '/LOGO_ITMexicali.jpg'} alt="Página oficial ITMEXICALI" style={{height: '38px', verticalAlign: 'middle'}} />
         </a>
         <a href="https://www.facebook.com/ITMEXICALI" target="_blank" rel="noopener noreferrer" aria-label="Facebook ITMEXICALI">
           <FaFacebook size={28} />
@@ -94,10 +96,19 @@ function App() {
           </p>
         </section>
         <section className="unity-section">
-          {/* Aquí irá el visor de Unity WebGL */}
+          {/* Unity WebGL Viewer */}
           <div className="unity-placeholder">
-            <span>Recorrido 360° </span>
-          
+            <iframe
+              src="https://itmrecorrido360.s3.us-east-1.amazonaws.com/ver1.2/index.html"
+              title="Recorrido 360° ITM"
+              style={{
+                width: '100%',
+                height: '100%',
+                border: 'none',
+                borderRadius: '12px'
+              }}
+              allowFullScreen
+            />
           </div>
         </section>
         <section className="itm-map-section">
