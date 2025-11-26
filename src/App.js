@@ -1,8 +1,9 @@
 
 
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { FaSun, FaMoon, FaFacebook, FaYoutube } from 'react-icons/fa';
+import { formatInTimeZone } from 'date-fns-tz';
 
 
 function getSystemDarkMode() {
@@ -14,6 +15,66 @@ function getSystemDarkMode() {
 
 function App() {
   const [darkMode, setDarkMode] = useState(getSystemDarkMode());
+  const [visitCount, setVisitCount] = useState(0);
+  const [localTime, setLocalTime] = useState('');
+  const [weather, setWeather] = useState(null);
+  const [weatherError, setWeatherError] = useState(false);
+  const visitCounterInitialized = useRef(false);
+  const weatherInitialized = useRef(false);
+
+  // Contador de visitas usando localStorage (solo se ejecuta una vez)
+  React.useEffect(() => {
+    if (visitCounterInitialized.current) return; // Evita duplicados
+    visitCounterInitialized.current = true;
+
+    const stored = localStorage.getItem('visitCount');
+    const count = stored ? parseInt(stored, 10) : 0;
+    const newCount = count + 1;
+    localStorage.setItem('visitCount', newCount);
+    setVisitCount(newCount);
+  }, []);
+
+  // Hora local de Mexicali (zona horaria del Pacífico)
+  React.useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      // Mexicali usa zona horaria del Pacífico (PST/PDT) como Los Angeles
+      const timeString = formatInTimeZone(now, 'America/Los_Angeles', 'hh:mm:ss a');
+      setLocalTime(timeString);
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Obtener clima de Mexicali usando Open-Meteo API (gratis, CORS habilitado)
+  React.useEffect(() => {
+    if (weatherInitialized.current) return;
+    weatherInitialized.current = true;
+
+    const fetchWeather = async () => {
+      try {
+        // Coordenadas de Mexicali: 32.6216, -115.4572
+        // Open-Meteo permite CORS y no requiere API key
+        const response = await fetch(
+          'https://api.open-meteo.com/v1/forecast?latitude=32.6216&longitude=-115.4572&current=temperature_2m,relative_humidity_2m,weather_code&timezone=auto'
+        );
+        const data = await response.json();
+        if (data && data.current) {
+          setWeather({
+            temp: Math.round(data.current.temperature_2m),
+            humidity: data.current.relative_humidity_2m,
+            code: data.current.weather_code
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching weather:', error);
+        setWeatherError(true);
+      }
+    };
+
+    fetchWeather();
+  }, []);
 
   // Actualiza el modo si el usuario cambia la preferencia del sistema
   React.useEffect(() => {
@@ -85,6 +146,25 @@ function App() {
           </button>
         </div>
       </nav>
+      {/* Hora y clima en esquina inferior izquierda */}
+      <div className="time-weather-widget">
+        <div className="time-display">
+          <span className="time-label">Hora:</span>
+          <span className="time-value">{localTime}</span>
+        </div>
+        {!weatherError && weather && (
+          <div className="weather-display">
+            <span className="weather-label">Clima:</span>
+            <span className="weather-value">{weather.temp}°C</span>
+            <span className="weather-humidity">{weather.humidity}%</span>
+          </div>
+        )}
+      </div>
+      {/* Contador de visitas en esquina inferior derecha */}
+      <div className="visit-counter">
+        <span className="visit-label">Visitas:</span>
+        <span className="visit-number">{visitCount}</span>
+      </div>
   {/* Switch para móvil: se muestra únicamente en pantallas pequeñas dentro de la barra azul */}
   {/* Se renderiza aquí para evitar solapamientos en móvil; está oculto en escritorio vía CSS */}
       
