@@ -647,6 +647,21 @@ body.dark-mode {
   height: 100%;
 }
 
+.itm-description {
+  max-width: 700px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: #003366;
+}
+
+.itm-description h2 {
+  color: #ffd600;
+  margin-bottom: 0.5rem;
+}
+
 /* Imagen de mapa entre recorrido 360 y ubicación */
 .itm-map-image-section {
   width: 100%;
@@ -675,21 +690,6 @@ body.dark-mode {
   .itm-map-image {
     border-radius: 8px;
   }
-}
-
-.itm-description {
-  max-width: 700px;
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 1.5rem 2rem;
-  text-align: center;
-  color: #003366;
-}
-
-.itm-description h2 {
-  color: #ffd600;
-  margin-bottom: 0.5rem;
 }
 
 .itm-footer {

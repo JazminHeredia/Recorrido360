@@ -4,6 +4,12 @@ import './App.css';
 import React, { useState, useRef } from 'react';
 import { FaSun, FaMoon, FaFacebook, FaYoutube } from 'react-icons/fa';
 import { formatInTimeZone } from 'date-fns-tz';
+import db from './firebase';
+import { doc, runTransaction, getDoc, increment } from 'firebase/firestore';
+
+// Configurar nombres (tu colección es "visitas")
+const GLOBAL_COUNTER_COLLECTION = 'visitas';
+const GLOBAL_COUNTER_DOC_ID = 'global';
 
 
 function getSystemDarkMode() {
@@ -15,11 +21,13 @@ function getSystemDarkMode() {
 
 function App() {
   const [darkMode, setDarkMode] = useState(getSystemDarkMode());
-  const [visitCount, setVisitCount] = useState(0);
+  const [visitCount, setVisitCount] = useState(0); // local
+  const [globalCount, setGlobalCount] = useState(null); // firestore
   const [localTime, setLocalTime] = useState('');
   const [weather, setWeather] = useState(null);
   const [weatherError, setWeatherError] = useState(false);
   const visitCounterInitialized = useRef(false);
+  const globalCounterInitialized = useRef(false);
   const weatherInitialized = useRef(false);
 
   // Contador de visitas usando localStorage (solo se ejecuta una vez)
@@ -34,18 +42,81 @@ function App() {
     setVisitCount(newCount);
   }, []);
 
-  // Hora local de Mexicali (zona horaria del Pacífico, siempre independiente del navegador)
+  // Contador global Firestore (incrementa una vez por arranque en este navegador)
   React.useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      // Obtener la hora UTC y convertirla a la zona horaria de Mexicali (PST/PDT)
-      // formatInTimeZone ignora la zona del navegador y convierte correctamente
-      const timeString = formatInTimeZone(now, 'America/Los_Angeles', 'hh:mm:ss a');
-      setLocalTime(timeString);
+    if (!db) return; // Firebase no configurado
+    if (globalCounterInitialized.current) return;
+    globalCounterInitialized.current = true;
+
+    const ref = doc(db, GLOBAL_COUNTER_COLLECTION, GLOBAL_COUNTER_DOC_ID);
+    const update = async () => {
+      try {
+        await runTransaction(db, async (tx) => {
+          const snap = await tx.get(ref);
+          if (!snap.exists()) {
+            tx.set(ref, { contador: 1 });
+          } else {
+            tx.update(ref, { contador: increment(1) });
+          }
+        });
+        const latest = await getDoc(ref);
+        if (latest.exists()) setGlobalCount(latest.data().contador);
+      } catch (e) {
+        console.error('Error actualizando contador global:', e);
+        setGlobalCount('ERR');
+      }
     };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
+    update();
+  }, []);
+
+  // Hora de Mexicali (America/Tijuana) basada en servidor, no en el reloj local
+  React.useEffect(() => {
+    let tickInterval = null;
+    let resyncInterval = null;
+
+    const fetchTijuanaTimeMs = async () => {
+      // Intenta worldtimeapi, luego timeapi.io; si falla, usa Date.now()
+      try {
+        const r = await fetch('https://worldtimeapi.org/api/timezone/America/Tijuana');
+        if (r.ok) {
+          const data = await r.json();
+          if (data && data.datetime) return new Date(data.datetime).getTime();
+        }
+        throw new Error('worldtimeapi failed');
+      } catch (_) {
+        try {
+          const r2 = await fetch('https://www.timeapi.io/api/Time/current/zone?timeZone=America/Tijuana');
+          if (r2.ok) {
+            const d2 = await r2.json();
+            if (d2 && d2.dateTime) return new Date(d2.dateTime).getTime();
+          }
+          throw new Error('timeapi.io failed');
+        } catch (_) {
+          return Date.now();
+        }
+      }
+    };
+
+    const startClock = async () => {
+      let currentMs = await fetchTijuanaTimeMs();
+      const render = () => {
+        const str = formatInTimeZone(new Date(currentMs), 'America/Tijuana', 'hh:mm:ss a');
+        setLocalTime(str);
+        currentMs += 1000;
+      };
+      render();
+      tickInterval = setInterval(render, 1000);
+      // Re-sincroniza cada 5 minutos para evitar deriva
+      resyncInterval = setInterval(async () => {
+        currentMs = await fetchTijuanaTimeMs();
+      }, 5 * 60 * 1000);
+    };
+
+    startClock();
+    return () => {
+      if (tickInterval) clearInterval(tickInterval);
+      if (resyncInterval) clearInterval(resyncInterval);
+    };
   }, []);
 
   // Obtener clima de Mexicali usando Open-Meteo API (gratis, CORS habilitado)
@@ -150,21 +221,22 @@ function App() {
       {/* Hora y clima en esquina inferior izquierda */}
       <div className="time-weather-widget">
         <div className="time-display">
-          <span className="time-label">Hora:</span>
+          <span className="time-label">Hora Mexicali:</span>
           <span className="time-value">{localTime}</span>
         </div>
         {!weatherError && weather && (
           <div className="weather-display">
-            <span className="weather-label">Clima:</span>
+            <span className="weather-label">Clima Mexicali: </span>
             <span className="weather-value">{weather.temp}°C</span>
-            <span className="weather-humidity">{weather.humidity}%</span>
           </div>
         )}
       </div>
       {/* Contador de visitas en esquina inferior derecha */}
       <div className="visit-counter">
-        <span className="visit-label">Visitas:</span>
-        <span className="visit-number">{visitCount}</span>
+        <div className="visit-global">
+          <span className="visit-label">Visitas: </span>
+          <span className="visit-number">{globalCount === null ? '...' : globalCount}</span>
+        </div>
       </div>
   {/* Switch para móvil: se muestra únicamente en pantallas pequeñas dentro de la barra azul */}
   {/* Se renderiza aquí para evitar solapamientos en móvil; está oculto en escritorio vía CSS */}
