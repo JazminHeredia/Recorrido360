@@ -34,11 +34,12 @@ function App() {
     setVisitCount(newCount);
   }, []);
 
-  // Hora local de Mexicali (zona horaria del Pacífico)
+  // Hora local de Mexicali (zona horaria del Pacífico, siempre independiente del navegador)
   React.useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      // Mexicali usa zona horaria del Pacífico (PST/PDT) como Los Angeles
+      // Obtener la hora UTC y convertirla a la zona horaria de Mexicali (PST/PDT)
+      // formatInTimeZone ignora la zona del navegador y convierte correctamente
       const timeString = formatInTimeZone(now, 'America/Los_Angeles', 'hh:mm:ss a');
       setLocalTime(timeString);
     };
@@ -190,6 +191,9 @@ function App() {
               allowFullScreen
             />
           </div>
+        </section>
+        <section className="itm-map-image-section">
+          <img src={process.env.PUBLIC_URL + '/mapa.png'} alt="Mapa del Instituto Tecnológico de Mexicali" className="itm-map-image" />
         </section>
         <section className="itm-map-section">
           <h3>Ubicación</h3>

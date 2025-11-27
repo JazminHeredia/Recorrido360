@@ -647,6 +647,36 @@ body.dark-mode {
   height: 100%;
 }
 
+/* Imagen de mapa entre recorrido 360 y ubicación */
+.itm-map-image-section {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.itm-map-image {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.15);
+}
+
+@media (max-width: 700px) {
+  .itm-map-image-section {
+    margin: 1.5rem auto;
+    padding: 0 0.5rem;
+  }
+  .itm-map-image {
+    border-radius: 8px;
+  }
+}
+
 .itm-description {
   max-width: 700px;
   background: transparent;
