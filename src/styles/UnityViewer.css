@@ -1,0 +1,50 @@
+.unity-section {
+  width: 100%;
+  max-width: 1000px;
+  min-height: 500px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem auto;
+  position: relative;
+}
+
+.unity-placeholder {
+  position: relative;
+  width: 100%;
+  padding-bottom: 75.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 12px;
+}
+
+.unity-placeholder iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos móviles para Unity360 */
+@media (max-width: 700px) {
+  .unity-section {
+    margin: 0 auto 1.5rem auto;
+    padding: 0 0.5rem;
+    min-height: 350px;
+  }
+  
+  .unity-placeholder {
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+    /* Centrado perfecto en móvil */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

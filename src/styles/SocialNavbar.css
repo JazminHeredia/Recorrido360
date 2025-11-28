@@ -1,0 +1,381 @@
+/* Menú de redes sociales debajo del header */
+.itm-social-navbar {
+  width: 100%;
+  background: #003366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.5rem 0 0.5rem 0;
+  z-index: 10;
+}
+.itm-social-navbar a {
+  color: #ffd600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+/* Force social icons (except the logo image link) to be white in all modes */
+.itm-social-navbar a:not(.itm-social-logo-link) {
+  color: #fff !important;
+}
+.itm-social-navbar a:not(.itm-social-logo-link) svg,
+.itm-social-navbar a:not(.itm-social-logo-link) .react-icon {
+  color: #fff !important;
+  fill: #fff !important;
+}
+.itm-social-navbar a:hover {
+  background: #207952;
+  color: #003366;
+}
+.itm-social-logo-link {
+  background: transparent !important;
+  width: auto !important;
+  height: auto !important;
+  margin-right: 0.7rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.itm-social-logo-link img {
+  height: 38px;
+  width: auto;
+  border-radius: 6px;
+}
+.itm-social-logo-link .nav-official-label {
+  color: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .itm-social-navbar {
+    gap: 0.7rem;
+    padding: 0.3rem 0;
+    /* Necesario para posicionar de forma absoluta el switch móvil sin afectar el flujo */
+    position: relative;
+    /* Permitir que el switch posicionado absolutamente no quede recortado */
+    overflow: visible;
+  }
+  .itm-social-navbar a {
+    width: 34px;
+    height: 34px;
+    font-size: 1.2rem;
+  }
+  /* ensure the logo link keeps its full width for the label */
+  .itm-social-logo-link {
+    width: auto !important;
+    height: auto !important;
+    display: inline-flex;
+    align-items: center;
+  }
+  .itm-social-logo-link img {
+    height: 28px;
+  }
+  /* Ocultar el switch del banner en móvil para evitar solapamiento */
+  .mode-switch-banner {
+    display: none;
+  }
+  /* Mostrar switch dentro del navbar (barra azul) en móvil
+     Lo posicionamos de forma absoluta para que no desplace a los demás elementos
+  */
+  .mode-switch-navbar-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    position: absolute;
+    /* centrar verticalmente en el borde derecho del navbar -> posición intermedia en móvil */
+    top: 32%;
+    right: 12px;
+    transform: translateY(-50%);
+    background: transparent;
+    border-radius: 16px;
+    /* remove extra padding so the element centers with the social icons */
+    padding: 0;
+    height: 34px;
+    box-sizing: border-box;
+    box-shadow: none;
+    z-index: 15;
+    transition: top 0.12s ease, right 0.12s ease, transform 0.12s ease;
+  }
+}
+
+/* Mobile-only toggle button (moon/sun) replacing the checkbox switch */
+.mode-toggle-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #fff; /* círculo blanco en modo claro */
+  border: 0;
+  padding: 4px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #003366; /* luna azul en modo claro */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* sombra sutil para el círculo blanco */
+}
+.mode-toggle-button:hover {
+  background: #f0f0f0; /* gris claro en hover para modo claro */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.mode-toggle-button:focus {
+  outline: 2px solid #ffd60055;
+  outline-offset: 2px;
+}
+
+/* Ensure the mobile toggle button icon color adapts to light/dark modes */
+.mode-switch-navbar-mobile .mode-toggle-button .mode-icon {
+  color: #000;
+}
+
+/* Match the size and vertical alignment of the social icons on small screens */
+@media (max-width: 700px) {
+  .mode-toggle-button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+  }
+  .mode-toggle-button .mode-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+  /* ensure the container is vertically centered relative to navbar icons */
+  .mode-switch-navbar-mobile {
+    top: 32%;
+    transform: translateY(-50%);
+    right: 10px;
+  }
+}
+
+/* Slightly smaller on very narrow screens to avoid crowding */
+@media (max-width: 420px) {
+  .mode-toggle-button {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* En pantallas mayores, la versión móvil del switch debe estar oculta */
+.mode-switch-navbar-mobile {
+  display: none;
+}
+
+/* === BOTONES DE MODO OSCURO MÓVIL === */
+
+/* Estos estilos se eliminan porque están definidos correctamente más abajo */
+
+/* Ensure banner switch is hidden on small screens and navbar mobile switch is visible only on small screens.
+   Also force icon colors to match light/dark modes (black in light, white in dark). */
+@media (max-width: 900px) {
+  /* Hide the banner switch on most small screens to avoid duplication/overlap */
+  .mode-switch-banner {
+    display: none !important;
+  }
+  /* Make sure the mobile navbar switch is shown on small screens */
+  .mode-switch-navbar-mobile {
+    display: flex !important;
+    align-items: center;
+    /* ensure positioned absolutely in the navbar on slightly larger small screens (landscape phones/tablets) */
+    position: absolute !important;
+    top: 32% !important;
+    right: 12px !important;
+    transform: translateY(-50%) !important;
+  }
+  .itm-social-navbar {
+    /* ensure navbar is relative and doesn't clip the absolute switch */
+    position: relative !important;
+    overflow: visible !important;
+  }
+}
+
+/* === COLORES DE ICONOS (MODO CLARO) === */
+/* Luna azul en círculo blanco */
+.mode-icon {
+  color: #003366 !important;
+  transition: color 0.15s ease-in-out;
+}
+
+.mode-switch-navbar-mobile .mode-icon,
+.mode-switch-navbar-mobile .mode-toggle-button .mode-icon,
+.mode-switch-navbar-mobile svg,
+.mode-switch-navbar-mobile i {
+  color: #003366 !important;
+  fill: #003366 !important;
+}
+
+/* === NAVBAR HEADER ADICIONAL === */
+
+/* Navbar de redes sociales en el header */
+.itm-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.itm-navbar {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.itm-navbar a {
+  color: #ffd600;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 6px;
+}
+
+.itm-navbar a:hover {
+  background: #ffd60033;
+  color: #fff;
+}
+.nav-label {
+  display: inline-block;
+}
+
+@media (max-width: 900px) {
+  .itm-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0 1rem;
+  }
+  .itm-navbar {
+    gap: 0.7rem;
+    font-size: 1rem;
+  }
+  .mode-switch {
+    position: static;
+    margin-top: 0.5rem;
+  }
+}
+
+.itm-social-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0 1rem 0;
+}
+.itm-social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.itm-social-links a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.itm-social-links a:hover {
+  color: #ffd600;
+}
+
+.itm-social-logo-link img {
+  height: 38px;
+  width: auto;
+  border-radius: 6px;
+}
+
+.itm-social-logo-link .nav-official-label {
+  color: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+/* Switch móvil */
+.mode-switch-navbar-mobile {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  position: absolute;
+  top: 32%;
+  right: 12px;
+  transform: translateY(-50%);
+}
+
+.mode-toggle-button {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.mode-toggle-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.05);
+}
+
+.mode-toggle-button .mode-icon {
+  color: #003366;
+}
+
+@media (max-width: 700px) {
+  .itm-social-navbar {
+    gap: 0.7rem;
+    padding: 0.3rem 0;
+    position: relative;
+    overflow: visible;
+  }
+  
+  .itm-social-navbar a {
+    width: 34px;
+    height: 34px;
+    font-size: 1.2rem;
+  }
+  
+  .itm-social-logo-link {
+    width: auto !important;
+    height: auto !important;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .itm-social-logo-link img {
+    height: 28px;
+  }
+  
+  .mode-switch-banner {
+    display: none;
+  }
+  
+  .mode-switch-navbar-mobile {
+    display: flex;
+  }
+}

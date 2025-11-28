@@ -1,0 +1,95 @@
+/* Botón modo oscuro: posición absoluta en desktop, fija en móvil */
+.mode-switch-banner {
+  position: absolute;
+  top: 18px;
+  right: 32px;
+  z-index: 20;
+  background: #fff;
+  border-radius: 24px;
+  padding: 0.2rem 0.7rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 700px) and (orientation: portrait) {
+  .itm-social-navbar {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+  .mode-switch-banner {
+    margin: 0;
+    background: #fff;
+    box-shadow: 0 2px 12px #0002;
+    border-radius: 24px;
+    padding: 0.3rem 1rem;
+    z-index: 10;
+    width: fit-content;
+    order: 2;
+    /* En portrait móvil preferimos ocultarlo para evitar solapamiento */
+    display: none !important;
+  }
+}
+
+.mode-switch-banner .mode-icon {
+  color: #003366;
+}
+
+/* Topbar para el switch de modo oscuro */
+.itm-header-topbar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.7rem 2.2rem 0.2rem 0;
+  background: transparent;
+}
+
+.mode-switch-top {
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 2px 8px #0001;
+  padding: 0.3rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: box-shadow 0.2s;
+}
+.mode-switch-top:hover {
+  box-shadow: 0 4px 16px #ffd60055;
+}
+
+/* Banner institucional con fondo blanco */
+.itm-banner-container {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0 0.5rem 0;
+  z-index: 11;
+}
+
+.dark-mode .itm-banner-container {
+  background: #222;
+}
+
+.itm-banner-img {
+  /* Mantener la imagen del banner responsiva pero limitar su tamaño visual
+     para evitar que ocupe demasiado espacio en localhost */
+  max-width: 420px;
+  max-height: 140px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0.5rem auto;
+  object-fit: contain;
+}
+
+@media (max-width: 700px) {
+  .itm-banner-img {
+    max-width: 280px;
+    max-height: 110px;
+    width: auto;
+  }
+}

@@ -1,0 +1,224 @@
+/* Grid para mapa y contacto */
+.map-contact-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+.itm-contact-info {
+  min-width: 220px;
+  max-width: 320px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.2rem 1.5rem;
+  color: #003366;
+  font-size: 1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.itm-contact-info h4 {
+  margin: 0.5rem 0 0.2rem 0;
+  color: #003366;
+  font-size: 1.1rem;
+}
+
+.itm-contact-info a {
+  color: #003366;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+@media (max-width: 900px) {
+  .map-contact-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+    /* Center items on narrow screens so the map and contact block align centrally */
+    align-items: center;
+  }
+  .itm-contact-info {
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+}
+
+/* Mapa Google Maps responsivo */
+.itm-map-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto 0 auto;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.5rem 2rem 2rem 2rem;
+  text-align: center;
+}
+
+.itm-map-section h3 {
+  color: #003366;
+  margin-bottom: 1rem;
+}
+
+.map-responsive {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #00336622;
+}
+
+.map-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 10px;
+}
+
+/* Mobile-specific: ensure the map centers and fits nicely in portrait */
+@media (max-width: 700px) {
+  .itm-map-section {
+    /* dejar un poco menos de padding lateral para que el mapa quede más a la izquierda */
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .map-responsive {
+    max-width: 680px; /* cap extremely wide layouts */
+    width: 100%;
+    /* quitar el margin auto para que el mapa se alinee al borde izquierdo del contenedor */
+    margin: 0;
+    /* pequeño ajuste hacia la izquierda para alinear con el contenedor Recorrido 360 */
+    transform: translateX(-0.5rem);
+    padding-bottom: 56.25%;
+  }
+}
+.itm-map-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto 0 auto;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.5rem 2rem 2rem 2rem;
+  text-align: center;
+}
+
+.itm-map-section h3 {
+  color: #003366;
+  margin-bottom: 1rem;
+}
+
+/* Grid para mapa y contacto */
+.map-contact-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+.map-responsive {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #00336622;
+}
+
+.map-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 10px;
+}
+
+.itm-contact-info {
+  min-width: 220px;
+  max-width: 320px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.2rem 1.5rem;
+  color: #003366;
+  font-size: 1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.itm-contact-info h4 {
+  margin: 0.5rem 0 0.2rem 0;
+  color: #003366;
+  font-size: 1.1rem;
+}
+
+.itm-contact-info a {
+  color: #003366;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+/* Modo oscuro */
+.dark-mode .itm-map-section h3 {
+  color: #ffd600;
+}
+
+.dark-mode .itm-contact-info h4 {
+  color: #ffd600;
+}
+
+.dark-mode .itm-contact-info {
+  color: #ccc;
+}
+
+.dark-mode .itm-contact-info a {
+  color: #ffd600;
+}
+
+.dark-mode .itm-contact-info a:hover {
+  color: #fff;
+}
+
+/* Mobile-specific: ensure the map centers and fits nicely in portrait */
+@media (max-width: 700px) {
+  .itm-map-section {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .map-responsive {
+    max-width: 680px;
+    width: 100%;
+    margin: 0;
+    transform: translateX(-0.5rem);
+    padding-bottom: 56.25%;
+  }
+}
+
+@media (max-width: 900px) {
+  .map-contact-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .itm-contact-info {
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+}

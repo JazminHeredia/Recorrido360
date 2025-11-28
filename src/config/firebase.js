@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { firebaseConfig } from './config/firebaseConfig';
+import { firebaseConfig } from './firebaseConfig';
 
 let db = null;
 try {

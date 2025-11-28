@@ -14,17 +14,41 @@
   background: #222;
 }
 
-/* Mobile switch icon color */
-.mode-switch-navbar-mobile .mode-toggle-button .mode-icon {
-  color: #fff;
-}
-.mode-switch-navbar-mobile .mode-icon {
-  color: #fff;
-}
+/* BOTÓN MODO OSCURO - Círculo azul con sol blanco */
 
-/* Icons inside switches and general mode icon */
+/* Todos los iconos de modo en modo oscuro */
 .mode-icon {
   color: #fff !important;
+}
+
+/* Botón móvil: círculo azul con sol blanco */
+.mode-switch-navbar-mobile .mode-toggle-button {
+  background: #003366 !important; /* círculo azul */
+  color: #fff !important; /* sol blanco */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important; /* sombra para contraste */
+}
+
+.mode-switch-navbar-mobile .mode-toggle-button:hover {
+  background: #004488 !important; /* azul más claro en hover */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+/* Sol blanco en círculo azul (modo oscuro) */
+.mode-switch-navbar-mobile .mode-icon,
+.mode-switch-navbar-mobile .mode-toggle-button .mode-icon,
+.mode-switch-navbar-mobile svg,
+.mode-switch-navbar-mobile i {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+/* Contenedor transparente */
+.mode-switch-navbar-mobile {
+  background: transparent !important;
+}
+
+.mode-switch-navbar-mobile:hover {
+  background: transparent !important;
 }
 
 /* Social navbar icons in dark */
