@@ -1,11 +1,11 @@
 // Your web app's Firebase configuration
 export const firebaseConfig = {
-  apiKey: "AIzaSyCU4anNNppLcKFwAhB9tPvW2EizMFVWu2s",
-  authDomain: "contadorvisitas-4bb64.firebaseapp.com",
-  projectId: "contadorvisitas-4bb64",
-  storageBucket: "contadorvisitas-4bb64.firebasestorage.app",
-  messagingSenderId: "798620673944",
-  appId: "1:798620673944:web:3197795d1b3d3e2ee26ded",
-  measurementId: "G-JXVF5H7B1X"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
